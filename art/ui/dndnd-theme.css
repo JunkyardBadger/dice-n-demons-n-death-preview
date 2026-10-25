@@ -1,0 +1,44 @@
+/* DnDnD theme — paste into :root (or import). Fonts: see <link> in style-guide.md */
+:root{
+  --c-void:#0d0b0f; --c-obsidian:#16121a; --c-stone:#231d26; --c-leather:#2e2219;
+  --c-parchment:#e8dcc0; --c-bone:#d9cfb8; --c-gold:#c9a227; --c-gold-light:#f3d98b; --c-bronze:#8c6a2f;
+  --c-blood:#8b1a1a; --c-blood-bright:#c0392b; --c-ember:#e2582b; --c-arcane:#7b4bc4; --c-arcane-light:#b08cf0;
+  --c-poison:#5f9e3a; --c-frost:#5aa7d6;
+  --font-logo:"UnifrakturMaguntia",serif; --font-display:"Cinzel Decorative",serif;
+  --font-heading:"Cinzel",serif; --font-body:"Alegreya",Georgia,serif;
+  --fs-body:16px; --fs-small:14px; --fs-h3:20px; --fs-h2:26px; --fs-h1:36px;
+  --gold-grad:linear-gradient(180deg,#f3d98b 0%,#c9a227 50%,#7a5a14 100%);
+  --radius-sm:4px; --radius:8px; --radius-lg:14px; --radius-token:50%;
+  --rule:1px solid var(--c-gold); --rule-inner:1px solid var(--c-bronze);
+  --shadow-panel:0 10px 30px rgba(0,0,0,.65),inset 0 0 0 1px rgba(0,0,0,.6),inset 0 0 40px rgba(0,0,0,.55);
+  --shadow-raised:0 4px 10px rgba(0,0,0,.6);
+  --glow-roll:0 0 18px rgba(243,217,139,.75); --glow-crit:0 0 28px 6px rgba(226,88,43,.9),0 0 60px rgba(201,162,39,.6);
+  --glow-fumble:0 0 24px 4px rgba(139,26,26,.9),0 0 50px rgba(123,75,196,.5); --focus-ring:0 0 0 3px var(--c-ember);
+  --panel-stone:radial-gradient(120% 90% at 30% 0%,#2c2530 0%,#1a151d 60%,#120f14 100%);
+  --panel-leather:radial-gradient(120% 90% at 30% 0%,#3a2a1e 0%,#271b13 60%,#1a120c 100%);
+  --hp-ok:var(--c-poison); --hp-bloodied:var(--c-ember); --hp-critical:var(--c-blood-bright); --hp-temp:var(--c-frost);
+  --cond-poisoned:var(--c-poison); --cond-frightened:var(--c-arcane); --cond-burning:var(--c-ember);
+  --cond-restrained:var(--c-bronze); --cond-prone:var(--c-bone); --cond-concentrating:var(--c-frost);
+}
+body{background:var(--c-void);color:var(--c-bone);font:var(--fs-body)/1.5 var(--font-body)}
+h1,h2,h3{font-family:var(--font-heading);color:var(--c-gold-light);letter-spacing:.04em}
+.panel{position:relative;background:var(--panel-stone);border:var(--rule);border-radius:var(--radius);box-shadow:var(--shadow-panel);padding:20px}
+.panel--leather{background:var(--panel-leather)}
+.panel::before{content:"";position:absolute;inset:5px;border:var(--rule-inner);border-radius:calc(var(--radius) - 3px);pointer-events:none}
+/* corner ornaments: SVG diamond, see ui/corner.svg */
+.panel::after{content:"";position:absolute;inset:-7px;pointer-events:none;
+  background:url(corner.svg) top left/14px no-repeat,url(corner.svg) top right/14px no-repeat,
+             url(corner.svg) bottom left/14px no-repeat,url(corner.svg) bottom right/14px no-repeat}
+.btn{font:600 15px/1 var(--font-heading);text-transform:uppercase;letter-spacing:.08em;padding:12px 22px;border-radius:var(--radius-sm);
+  border:1.5px solid var(--c-gold);background:var(--c-blood);color:var(--c-parchment);box-shadow:var(--shadow-raised);cursor:pointer;transition:.15s}
+.btn:hover{background:var(--c-blood-bright);border-color:var(--c-gold-light);color:#fff}
+.btn:active{background:#5e1111;border-color:var(--c-bronze);transform:translateY(1px);box-shadow:none}
+.btn:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.btn:disabled{background:#3a3238;border-color:#5a4f55;color:#8a7f85;cursor:not-allowed;box-shadow:none}
+.btn--secondary{background:var(--c-stone);color:var(--c-gold-light)} .btn--secondary:hover{background:#2f2733}
+.btn--arcane{background:var(--c-arcane);border-color:var(--c-arcane-light);color:#fff}
+.btn--danger{background:transparent;border-color:var(--c-blood-bright);color:var(--c-blood-bright)}
+.hpbar{height:10px;background:var(--c-void);border:1px solid var(--c-bronze);border-radius:5px;overflow:hidden}
+.hpbar>i{display:block;height:100%;background:var(--hp-ok);transition:width .3s}
+.hpbar[data-state=bloodied]>i{background:var(--hp-bloodied)} .hpbar[data-state=critical]>i{background:var(--hp-critical)}
+.die.rolling{filter:drop-shadow(var(--glow-roll))} .die.crit{box-shadow:var(--glow-crit)} .die.fumble{box-shadow:var(--glow-fumble)}
